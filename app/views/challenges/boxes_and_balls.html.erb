@@ -1,0 +1,49 @@
+<h1 class="text-2xl font-bold mb-4">Boxes and Balls Challenge</h1>
+
+<!-- Display error message if the number of boxes is less than 1 -->
+<% if flash[:error] %>
+  <div class="bg-red-500 text-white font-semibold p-2 rounded mb-4 w-1/2 ml-0">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<%= form_with url: boxes_and_balls_path, method: :get, local: true do %>
+  <div class="mb-4 flex items-center">
+    <label for="n" class="text-sm font-medium text-gray-700 mr-2">Enter the number of boxes:</label>
+    <%= text_field_tag :boxes_number, @boxes_number, class: "px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+  <div class="mb-4">
+    <label class="inline-flex items-center">
+      <%= check_box_tag :visual_answer, 'true', params[:visual_answer] == 'true', class: 'form-checkbox' %>
+      <span class="ml-2 block text-sm font-medium text-gray-700">Do you want a visual representation of the steps?</span>
+    </label>
+    <p class="text-xs text-gray-700 mt-2">If you try more than 20 boxes, results will not be as clear as fewer boxes.</p>
+  </div>
+
+  <%= submit_tag 'Calculate Minimum Walks', class: "bg-indigo-600 text-white px-4 py-2 rounded-md" %>
+<% end %>
+<br/>
+<% if @walks %>
+<div class="mb-4">
+  <p class="mt-4 text-lg font-semibold">Minimum number of walks: <%= " #{@walks}" %></p>
+</div>
+<% end %>
+<% if @visual_answer && @steps %>
+  <!-- Visual Representation -->
+  <!-- Compact Matrix Representation for Each Step -->
+  <div class="grid grid-cols-8 gap-1">
+    <% @steps.each do |step| %>
+      <!-- Each step is now represented as a single cell -->
+      <div class="p-2 border border-gray-300 bg-gray-50 rounded text-center">
+        <h3 class="text-sm font-semibold"> <%= step[:walk] == 0 ? "Initial boxes capacities" : "Walk #{step[:walk]}"  %></h3>
+        <p class="text-xs text-gray-500 mb-1"> <%=  step[:walk] == 0 ? "" : "Balls Added: #{step[:balls_per_box]}" %></p>
+        <div class="text-xs font-mono">[<%= step[:boxes].join('], [') %>]</div>
+      </div>
+    <% end %>
+  </div>
+
+<% end %>
+<br/>
+<div class="mb-4">
+  <%= link_to 'Back', root_path, class: "bg-gray-500 text-white px-4 py-2 rounded-md" %>
+</div>
