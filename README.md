@@ -41,7 +41,13 @@ To get started with the Challenge Solver App, follow these steps:
 
 4. **Run the server**:
 
-  Start your Rails server:
+  The first time you runs the app, use this command:
+
+  ```
+    rails assets:precompile;rails server
+  ```
+
+  Then to start your Rails server:
 
   ```
   rails server
@@ -49,7 +55,7 @@ To get started with the Challenge Solver App, follow these steps:
 
   You can access the app at `http://localhost:3000`.
 
-  **If it is not looking good, you will need to stop your server and then run this:
+  ** If it is not looking good, you will need to stop your server and then run this:
   ```
     rails assets:precompile;rails server
   ```
