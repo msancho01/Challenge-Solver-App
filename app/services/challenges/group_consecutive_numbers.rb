@@ -23,17 +23,17 @@ module Challenges
       group_size = 2
 
       while current_number <= n
-        grupo = []
+        group = []
         group_size.times do
           break if current_number > n
-          grupo << current_number
+          group << current_number
           current_number += 1
         end
-        groups << grupo
+        groups << group
         group_size += 2
       end
 
-      { groups: groups, group_size: group_size -2}
+      { groups: groups, group_size: group_size -2 }
     end
   end
 end
