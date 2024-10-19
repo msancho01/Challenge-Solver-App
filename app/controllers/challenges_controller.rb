@@ -42,18 +42,4 @@ class ChallengesController < ApplicationController
 
     return walks, steps
   end
-
-  def get_balls_per_box_per_box(boxes)
-    capacities = Hash.new
-
-    boxes.each { |box| capacities[box] = 0 if box > 0 }
-
-    boxes.each do |box|
-      capacities.keys.each do |key|
-        capacities[key] = capacities[key] + 1 if key <= box
-      end
-    end
-    p "capacities = #{capacities}"
-    capacities.keys.count > 1 ? capacities.keys[1] : capacities.keys[0]
-  end
 end
